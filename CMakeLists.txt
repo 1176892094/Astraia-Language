@@ -1,18 +1,16 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(Astraia_Language)
+# ✅ 启用 C++ 和 Objective-C++
+project(Astraia_Language LANGUAGES CXX OBJCXX)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# 使用 main.mm
-set(SOURCES main.mm)
+# 添加源文件
+add_executable(Astraia_Language main.mm)
 
-add_executable(Astraia_Language ${SOURCES})
-
-# 编译为 Objective-C++
-set_source_files_properties(${SOURCES} PROPERTIES
-        COMPILE_FLAGS "-x objective-c++"
+# 链接 macOS 框架
+target_link_libraries(Astraia_Language
+        "-framework Cocoa"
+        "-framework Metal"
+        "-framework MetalKit"
 )
-
-# 链接 Cocoa 框架
-target_link_libraries(Astraia_Language "-framework Cocoa")
